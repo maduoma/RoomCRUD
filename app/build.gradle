@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.dodemy.android.roomcrud"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        // or use exportSchema = false in @Database. It is used in Room to export the Schema in JSON format
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+   // To run with latest version of implementation 'com.jakewharton:butterknife:10.1.0' that support AndroidX
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //Room
+    implementation 'androidx.room:room-runtime:2.2.4'
+    annotationProcessor 'androidx.room:room-compiler:2.2.4'
+
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+    //Use: annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0' in Java
+    //Use: apt 'androidx.lifecycle:lifecycle-compiler:2.2.0' in Kotlin
+    // that is apt replaces annotationProcessor in Java
+    //You can use implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0' to replace
+    //both annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0' and
+    // apt 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+    //in Java and Kotlin respectively when Java8 is used for Lambda
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+    // butter knife
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    //JSON
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //Material Design
+    implementation 'com.google.android.material:material:1.1.0'
+}
